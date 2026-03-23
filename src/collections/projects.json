@@ -1,0 +1,20 @@
+[
+	{
+		"name": "PyTorch Pruning",
+		"description": "Neural network pruning methods in PyTorch — Lottery Ticket Hypothesis, structured & unstructured pruning.",
+		"image": "https://opengraph.githubassets.com/1/Krishnkant-Swarnkar/Pytorch-pruning",
+		"url": "https://github.com/Krishnkant-Swarnkar/Pytorch-pruning"
+	},
+	{
+		"name": "Metaphor Detection",
+		"description": "Di-LSTM Contrast model for metaphor detection — FigLang 2018 shared task.",
+		"image": "https://opengraph.githubassets.com/1/Krishnkant-Swarnkar/Metaphor-Detection-Shared-Task",
+		"url": "https://github.com/Krishnkant-Swarnkar/Metaphor-Detection-Shared-Task"
+	},
+	{
+		"name": "Language Model",
+		"description": "Text generation with language models — early explorations in NLP.",
+		"image": "https://opengraph.githubassets.com/1/Krishnkant-Swarnkar/Language-Model---Text-Generation",
+		"url": "https://github.com/Krishnkant-Swarnkar/Language-Model---Text-Generation"
+	}
+]

@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("post");
+
+const { count } = Astro.props;
+
+function parseDate(dateStr) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
+}
+
+const sortedPosts = allPosts
+  .map((post) => ({
+    ...post,
+    date: parseDate(post.data.dateFormatted),
+  }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+const postsLoop = sortedPosts.slice(0, count).map((post) => {
+  return {
+    ...(post.data || {}),
+    link: `/post/${post.slug}`,
+  };
+});
+---
+
+{
+  postsLoop.map((post) => {
+    return (
+      <div
+        class="relative border border-transparent border-dashed cursor-pointer p-7 group rounded-2xl"
+        onclick={`location.href = '${post.link}'`}
+      >
+        <div class="absolute inset-0 z-20 w-full h-full duration-300 ease-out bg-white border border-dashed dark:bg-neutral-950 rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:-translate-x-1 group-hover:-translate-y-1" />
+        <div class="absolute inset-0 z-10 w-full h-full duration-300 ease-out border border-dashed rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:translate-x-1 group-hover:translate-y-1" />
+        <div class="relative z-30 duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1">
+          <h2 class="flex items-center mb-3">
+            <a
+              href={post.link}
+              class="text-base font-bold leading-tight tracking-tight sm:text-lg dark:text-neutral-100"
+            >
+              {post.title}
+            </a>
+          </h2>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <span>{post.description}</span>
+          </p>
+          <div class="mt-2.5 text-xs font-medium text-neutral-800 dark:text-neutral-300">
+            Posted on {post.dateFormatted}
+          </div>
+        </div>
+      </div>
+    )
+  })
+}
