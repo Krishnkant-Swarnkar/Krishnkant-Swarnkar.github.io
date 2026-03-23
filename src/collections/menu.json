@@ -14,5 +14,9 @@
 	{
 		"name": "About",
 		"url": "/about"
+	},
+	{
+		"name": "CV",
+		"url": "/cv"
 	}
 ]
