@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/main.astro";
+
+export async function getStaticPaths() {
+  const briefs = await getCollection("daily-brief");
+  return briefs.map((brief) => ({
+    params: { slug: brief.slug },
+    props: { brief },
+  }));
+}
+
+const { brief } = Astro.props;
+const { Content } = await brief.render();
+---
+
+<Layout title={`${brief.data.title} — Krishnkant Swarnkar`}>
+  <main
+    class="relative z-30 max-w-4xl pb-1 mx-auto mt-10 bg-white dark:bg-neutral-950 md:rounded-t-md text-neutral-900"
+  >
+    <div
+      class="relative flex flex-col px-5 pt-6 border-t border-b-0 md:border-r md:border-l md:pt-20 lg:px-0 justify-stretch md:rounded-t-2xl border-neutral-200 dark:border-neutral-800"
+    >
+      <div
+        class="absolute top-0 left-0 hidden w-px h-full mt-1 -translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"
+      ></div>
+      <div
+        class="absolute top-0 right-0 hidden w-px h-full mt-1 translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"
+      ></div>
+      <div class="w-full max-w-2xl mx-auto mb-6">
+        <a
+          href="/guest-lounge/daily-brief"
+          class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+        >← All briefs</a>
+      </div>
+      <h1
+        class="w-full max-w-2xl mx-auto text-3xl font-bold leading-tight tracking-tighter text-left md:mb-12 md:text-4xl dark:text-neutral-100 lg:text-5xl md:leading-none"
+      >
+        {brief.data.title}
+      </h1>
+    </div>
+
+    <article
+      class="w-full max-w-2xl mx-auto mb-20 prose-sm prose px-7 lg:px-0 lg:prose-lg dark:prose-invert"
+    >
+      <Content />
+    </article>
+  </main>
+</Layout>

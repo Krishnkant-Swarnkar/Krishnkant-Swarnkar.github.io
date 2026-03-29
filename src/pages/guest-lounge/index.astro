@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import PageHeading from "../../components/page-heading.astro";
+import Layout from "../../layouts/main.astro";
+
+const briefs = await getCollection("daily-brief");
+const latestBrief = briefs.sort((a, b) => b.data.date.localeCompare(a.data.date))[0];
+---
+
+<Layout title="Guest Lounge — Krishnkant Swarnkar">
+  <section class="relative z-20 max-w-4xl mx-auto my-12 px-7 lg:px-0">
+    <PageHeading
+      title="Guest Lounge"
+      description="A curated space — daily news digests, music, art, and more. Pull up a chair."
+    />
+
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Daily Brief Card -->
+      <a href="/guest-lounge/daily-brief" class="relative flex flex-col p-6 group rounded-2xl">
+        <span
+          class="absolute inset-0 z-20 block w-full h-full duration-300 ease-out bg-transparent border border-transparent border-dashed group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:border group-hover:border-neutral-300 dark:group-hover:border-neutral-600 group-hover:border-dashed rounded-2xl group-hover:bg-white dark:group-hover:bg-neutral-950"
+        ></span>
+        <span
+          class="absolute inset-0 z-10 block w-full h-full duration-300 ease-out border border-dashed rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:translate-x-1 group-hover:translate-y-1"
+        ></span>
+        <span class="relative z-30 block duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1">
+          <span class="text-3xl mb-3 block">📰</span>
+          <span class="block text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Daily Brief</span>
+          <span class="text-sm text-neutral-600 dark:text-neutral-400 block mb-5 leading-relaxed">
+            AI-curated daily digest — finance, geopolitics, tech, and world news.
+          </span>
+          {latestBrief && (
+            <span class="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+              Latest: {latestBrief.data.dateFormatted} →
+            </span>
+          )}
+        </span>
+      </a>
+
+      <!-- Music — Coming Soon -->
+      <div class="relative flex flex-col p-6 rounded-2xl border border-dashed border-neutral-200 dark:border-neutral-800 opacity-40 cursor-default">
+        <span class="text-3xl mb-3 block">🎵</span>
+        <span class="block text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Music</span>
+        <span class="text-sm text-neutral-600 dark:text-neutral-400 block mb-5 leading-relaxed">
+          What I'm making and listening to.
+        </span>
+        <span class="text-xs font-medium text-neutral-400 dark:text-neutral-600">Coming soon</span>
+      </div>
+
+      <!-- Art — Coming Soon -->
+      <div class="relative flex flex-col p-6 rounded-2xl border border-dashed border-neutral-200 dark:border-neutral-800 opacity-40 cursor-default">
+        <span class="text-3xl mb-3 block">🎨</span>
+        <span class="block text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Art</span>
+        <span class="text-sm text-neutral-600 dark:text-neutral-400 block mb-5 leading-relaxed">
+          Visual experiments and creative work.
+        </span>
+        <span class="text-xs font-medium text-neutral-400 dark:text-neutral-600">Coming soon</span>
+      </div>
+
+    </div>
+  </section>
+</Layout>

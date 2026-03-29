@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import PageHeading from "../../../components/page-heading.astro";
+import Layout from "../../../layouts/main.astro";
+
+const briefs = await getCollection("daily-brief");
+const sorted = briefs.sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<Layout title="Daily Brief — Krishnkant Swarnkar">
+  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
+    <div class="mb-2">
+      <a
+        href="/guest-lounge"
+        class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+      >← Guest Lounge</a>
+    </div>
+    <PageHeading
+      title="Daily Brief"
+      description="An AI-curated digest of finance, geopolitics, tech, and world news. Updated daily."
+    />
+
+    <div class="mt-8 space-y-3">
+      {sorted.map((brief) => (
+        <a
+          href={`/guest-lounge/daily-brief/${brief.slug}`}
+          class="flex items-center justify-between px-5 py-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors duration-200 group"
+        >
+          <span class="font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+            {brief.data.dateFormatted}
+          </span>
+          <span class="text-neutral-400 dark:text-neutral-600 text-sm group-hover:text-indigo-400 transition-colors">Read →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

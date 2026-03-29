@@ -18,5 +18,9 @@
 	{
 		"name": "CV",
 		"url": "/cv"
+	},
+	{
+		"name": "Lounge",
+		"url": "/guest-lounge"
 	}
 ]
