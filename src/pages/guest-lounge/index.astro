@@ -1,10 +1,6 @@
 ---
-import { getCollection } from "astro:content";
 import PageHeading from "../../components/page-heading.astro";
 import Layout from "../../layouts/main.astro";
-
-const briefs = await getCollection("daily-brief");
-const latestBrief = briefs.sort((a, b) => b.data.date.localeCompare(a.data.date))[0];
 ---
 
 <Layout title="Guest Lounge — Krishnkant Swarnkar">
@@ -17,7 +13,12 @@ const latestBrief = briefs.sort((a, b) => b.data.date.localeCompare(a.data.date)
     <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
       <!-- Daily Brief Card -->
-      <a href="/guest-lounge/daily-brief" class="relative flex flex-col p-6 group rounded-2xl">
+      <a
+        href="https://www.notion.so/DailyBrief-Today-331bf6223c39818ca9a2caa8a3b94967"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="relative flex flex-col p-6 group rounded-2xl"
+      >
         <span
           class="absolute inset-0 z-20 block w-full h-full duration-300 ease-out bg-transparent border border-transparent border-dashed group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:border group-hover:border-neutral-300 dark:group-hover:border-neutral-600 group-hover:border-dashed rounded-2xl group-hover:bg-white dark:group-hover:bg-neutral-950"
         ></span>
@@ -30,11 +31,9 @@ const latestBrief = briefs.sort((a, b) => b.data.date.localeCompare(a.data.date)
           <span class="text-sm text-neutral-600 dark:text-neutral-400 block mb-5 leading-relaxed">
             AI-curated daily digest — finance, geopolitics, tech, and world news.
           </span>
-          {latestBrief && (
-            <span class="text-xs font-medium text-indigo-600 dark:text-indigo-400">
-              Latest: {latestBrief.data.dateFormatted} →
-            </span>
-          )}
+          <span class="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+            Read today's brief →
+          </span>
         </span>
       </a>
 

@@ -9,16 +9,6 @@ const postCollection = defineCollection({
 	}),
 });
 
-const dailyBriefCollection = defineCollection({
-	type: "content",
-	schema: z.object({
-		title: z.string(),
-		date: z.string(),
-		dateFormatted: z.string(),
-	}),
-});
-
 export const collections = {
 	post: postCollection,
-	"daily-brief": dailyBriefCollection,
 };
