@@ -1,6 +1,6 @@
 ---
-import Button from "../components/button.astro";
 import Separator from "../components/home/separator.astro";
+import SocialLinks from "../components/social-links.astro";
 import Writings from "../components/home/writings.astro";
 import Layout from "../layouts/main.astro";
 ---
@@ -16,31 +16,17 @@ import Layout from "../layouts/main.astro";
         >
           Krishnkant Swarnkar
         </h1>
-        <p class="mb-5 text-base text-neutral-600 dark:text-neutral-400">
+        <p class="mb-5 text-base leading-7 text-neutral-600 dark:text-neutral-400">
           AI Research Engineer at AlphaSense — NLP, large language models, and
           building intelligent systems.
         </p>
-        <p
-          class="mb-6 text-sm leading-7 text-neutral-600 dark:text-neutral-400"
-        >
+        <p class="mb-6 text-base leading-7 text-neutral-600 dark:text-neutral-400">
           I work on NLP and machine learning applied to financial intelligence.
           I started coding during college — tinkering with games and web apps —
           and gradually found my way into deep learning and research. Outside of
           work, I enjoy music, art, and exploring ideas across disciplines.
         </p>
-        <p class="mb-2 font-semibold text-neutral-800 dark:text-neutral-200">
-          Things I work with:
-        </p>
-        <ul
-          class="py-2 space-y-[3px] text-sm list-disc list-inside text-neutral-500 dark:text-neutral-400"
-        >
-          <li>LLMs & NLP Research</li>
-          <li>Python & PyTorch</li>
-          <li>Machine Learning</li>
-          <li>Data Analysis</li>
-          <li>and more...</li>
-        </ul>
-        <Button text="View my GitHub" link="https://github.com/Krishnkant-Swarnkar" />
+        <SocialLinks />
       </div>
       <div
         class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0"
@@ -72,32 +58,6 @@ import Layout from "../layouts/main.astro";
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="mt-16 md:mt-20">
-      <h2 class="mb-2 text-xl font-bold dark:text-neutral-200">Let's Connect</h2>
-      <p class="text-sm leading-7 text-neutral-600 dark:text-neutral-400">
-        Find me on
-        <a
-          href="https://github.com/Krishnkant-Swarnkar"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-indigo-600 dark:text-indigo-400 underline">GitHub</a
-        >,
-        <a
-          href="https://www.linkedin.com/in/krishnkant-swarnkar/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-indigo-600 dark:text-indigo-400 underline">LinkedIn</a
-        >, or
-        <a
-          href="https://x.com/krishnkant98"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-indigo-600 dark:text-indigo-400 underline">X</a
-        >
-        — always happy to connect.
-      </p>
     </div>
   </div>
 
