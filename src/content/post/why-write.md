@@ -1,6 +1,5 @@
 ---
 title: "Why Write?"
-description: "On models of the world, connecting dots, and why consuming information is only half of it."
 dateFormatted: "September 19 2026"
 ---
 
