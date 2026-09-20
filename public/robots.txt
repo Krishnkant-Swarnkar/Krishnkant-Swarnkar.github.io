@@ -1,2 +1,213 @@
+# robots.txt — krishnkant-swarnkar.github.io
+#
+# Policy: block AI *training* crawlers, allow normal search engines and
+# AI *answer* bots that cite sources back to this site.
+#
+# Notes:
+#   - Groups are matched by product token, case-insensitively. The most
+#     specific matching group wins, so the "*" group at the bottom does not
+#     override the blocks above it.
+#   - Wildcards are not allowed in a User-agent name (only the bare "*"),
+#     so every bot has to be listed explicitly.
+#   - robots.txt is advisory. Well-behaved crawlers honor it; it is not
+#     enforcement. See the note on non-compliant bots near the end.
+
+# ---------------------------------------------------------------------------
+# Allowed: classic search engines (keeps the site indexed and findable)
+# ---------------------------------------------------------------------------
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Allowed: AI answer engines and user-triggered fetchers.
+# These read a page to answer a question and cite the source; none of them
+# use what they fetch for model training. They send traffic back here.
+# ---------------------------------------------------------------------------
+
+# OpenAI — ChatGPT search results and user-initiated fetches
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude search and user-initiated fetches
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity. Note: Cloudflare documented Perplexity retrying from
+# undisclosed IPs with a spoofed browser user-agent after being blocked.
+# Allowed here per policy, but its compliance record is the weakest of
+# the group.
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Amazon — these two explicitly exclude generative AI training
+# (unlike Amazonbot, which is blocked below)
+User-agent: Amzn-SearchBot
+Allow: /
+
+User-agent: Amzn-User
+Allow: /
+
+# Other answer engines
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: MistralAI-Index
+Allow: /
+
+User-agent: Kimi-User
+Allow: /
+
+User-agent: meta-externalfetcher
+Allow: /
+
+# ---------------------------------------------------------------------------
+# Blocked: model-training crawlers
+# ---------------------------------------------------------------------------
+
+# OpenAI — foundation model training
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic — training; anthropic-ai and Claude-Web are legacy tokens,
+# kept for older infrastructure that may still send them
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Google — Gemini training only. Does NOT affect Google Search
+# indexing or ranking; that is Googlebot, allowed above.
+User-agent: Google-Extended
+Disallow: /
+
+# Apple — Apple Intelligence training only. Pages stay in
+# Siri/Spotlight/Safari search via Applebot, allowed above.
+User-agent: Applebot-Extended
+Disallow: /
+
+# Meta
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Meta — crawls for speech recognition model training
+User-agent: FacebookBot
+Disallow: /
+
+# Amazon — "may be used to train Amazon AI models" per Amazon's own docs.
+# Amzn-SearchBot / Amzn-User are the training-free equivalents, allowed above.
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: bedrockbot
+Disallow: /
+
+# Common Crawl — its archives feed many training datasets
+User-agent: CCBot
+Disallow: /
+
+# Other model builders
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+User-agent: MistralAI-Training
+Disallow: /
+
+User-agent: AI2Bot
+Disallow: /
+
+User-agent: Ai2Bot-Dolma
+Disallow: /
+
+User-agent: DeepSeekBot
+Disallow: /
+
+User-agent: QwenBot
+Disallow: /
+
+User-agent: TongyiBot
+Disallow: /
+
+User-agent: ERNIEBot
+Disallow: /
+
+User-agent: DoubaoBot
+Disallow: /
+
+User-agent: PanguBot
+Disallow: /
+
+User-agent: KimiBot
+Disallow: /
+
+User-agent: YandexAdditional
+Disallow: /
+
+User-agent: YandexAdditionalBot
+Disallow: /
+
+# Dataset harvesters and content resellers
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: img2dataset
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
+
+# ---------------------------------------------------------------------------
+# Everything else
+# ---------------------------------------------------------------------------
+
 User-agent: *
 Allow: /
