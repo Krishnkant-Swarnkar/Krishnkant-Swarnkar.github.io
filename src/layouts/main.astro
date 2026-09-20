@@ -29,6 +29,16 @@ const { title } = Astro.props;
       }
     </style>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- GoatCounter analytics. Requests from localhost and private networks
+         are ignored by count.js, so `npm run dev` does not affect stats.
+         Append #toggle-goatcounter to a URL to mute your own visits. -->
+    <script
+      is:inline
+      data-goatcounter="https://krishnkant.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js"></script>
+
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
   </head>
   <body class="antialiased bg-white dark:bg-neutral-950">
