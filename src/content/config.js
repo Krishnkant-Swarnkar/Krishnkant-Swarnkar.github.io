@@ -4,7 +4,10 @@ const postCollection = defineCollection({
 	type: "content",
 	schema: z.object({
 		title: z.string(),
-		dateFormatted: z.string(),
+		// Omit for an upcoming post; it has no publish date yet.
+		dateFormatted: z.string().optional(),
+		// Shows the post as a non-clickable teaser and skips building its page.
+		upcoming: z.boolean().optional(),
 	}),
 });
 

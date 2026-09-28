@@ -9,12 +9,17 @@ function parseDate(dateStr) {
   return new Date(`${month} ${parseInt(day)}, ${year}`);
 }
 
+// Upcoming posts sit above the published ones, which run newest first.
 const sortedPosts = allPosts
   .map((post) => ({
     ...post,
-    date: parseDate(post.data.dateFormatted),
+    date: post.data.dateFormatted ? parseDate(post.data.dateFormatted) : null,
   }))
-  .sort((a, b) => b.date.getTime() - a.date.getTime());
+  .sort((a, b) => {
+    if (a.data.upcoming !== b.data.upcoming) return a.data.upcoming ? -1 : 1;
+    if (!a.date || !b.date) return 0;
+    return b.date.getTime() - a.date.getTime();
+  });
 
 const postsLoop = sortedPosts.slice(0, count).map((post) => {
   return {
@@ -26,24 +31,44 @@ const postsLoop = sortedPosts.slice(0, count).map((post) => {
 
 {
   postsLoop.map((post) => {
+    const upcoming = post.upcoming;
     return (
       <div
-        class="relative border border-transparent border-dashed cursor-pointer p-7 group rounded-2xl"
-        onclick={`location.href = '${post.link}'`}
+        class:list={[
+          "relative border border-transparent border-dashed p-7 rounded-2xl",
+          upcoming ? "cursor-default opacity-60" : "cursor-pointer group",
+        ]}
+        onclick={upcoming ? undefined : `location.href = '${post.link}'`}
       >
         <div class="absolute inset-0 z-20 w-full h-full duration-300 ease-out bg-white border border-dashed dark:bg-neutral-950 rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:-translate-x-1 group-hover:-translate-y-1" />
         <div class="absolute inset-0 z-10 w-full h-full duration-300 ease-out border border-dashed rounded-2xl border-neutral-300 dark:border-neutral-600 group-hover:translate-x-1 group-hover:translate-y-1" />
         <div class="relative z-30 duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1">
           <h2 class="flex items-center mb-3">
-            <a
-              href={post.link}
-              class="text-base font-bold leading-tight tracking-tight sm:text-lg dark:text-neutral-100"
-            >
-              {post.title}
-            </a>
+            {upcoming ? (
+              <span class="text-base font-bold leading-tight tracking-tight sm:text-lg text-neutral-500 dark:text-neutral-400">
+                {post.title}
+              </span>
+            ) : (
+              <a
+                href={post.link}
+                class="text-base font-bold leading-tight tracking-tight sm:text-lg dark:text-neutral-100"
+              >
+                {post.title}
+              </a>
+            )}
           </h2>
-          <div class="text-xs font-medium text-neutral-800 dark:text-neutral-300">
-            {post.dateFormatted}
+          <div class="flex items-center text-xs font-medium text-neutral-800 dark:text-neutral-300">
+            {upcoming ? (
+              <>
+                <span class="relative flex w-1.5 h-1.5 mr-2">
+                  <span class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping motion-reduce:animate-none bg-neutral-400 dark:bg-neutral-500" />
+                  <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-neutral-500 dark:bg-neutral-400" />
+                </span>
+                <span class="text-neutral-500 dark:text-neutral-400">Soon</span>
+              </>
+            ) : (
+              post.dateFormatted
+            )}
           </div>
         </div>
       </div>
