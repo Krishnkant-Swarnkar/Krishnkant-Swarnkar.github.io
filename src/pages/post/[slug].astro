@@ -3,8 +3,12 @@ import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/post.astro";
 
 export async function getStaticPaths() {
-	// Upcoming posts are teasers only — no page is built for them.
-	const postEntries = await getCollection("post", ({ data }) => !data.upcoming);
+	// Upcoming posts are teasers and external ones live elsewhere, so
+	// neither gets a page built here.
+	const postEntries = await getCollection(
+		"post",
+		({ data }) => !data.upcoming && !data.externalUrl,
+	);
 	return postEntries.map((entry) => ({
 		params: { slug: entry.slug },
 		props: { entry },
